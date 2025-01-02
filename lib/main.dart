@@ -4,7 +4,7 @@ import 'app_screens/toDo_item.dart';
 import 'app_screens/toDo.dart';
 
 void main() {
-  runApp(Home());
+  runApp(const Home());
 }
 
 class Home extends StatefulWidget {
