@@ -39,7 +39,7 @@ class CommercializationScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const UpgradeToPremiumScreen(),
+                    builder: (context) => const UpgradeToPremiumDetailsScreen(),
                   ),
                 );
               },
@@ -51,7 +51,7 @@ class CommercializationScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const EthicalPartnershipsScreen(),
+                    builder: (context) => const EthicalPartnershipDetailsScreen(),
                   ),
                 );
               },
@@ -64,39 +64,47 @@ class CommercializationScreen extends StatelessWidget {
   }
 }
 
-class UpgradeToPremiumScreen extends StatelessWidget {
-  const UpgradeToPremiumScreen({super.key});
+class UpgradeToPremiumDetailsScreen extends StatelessWidget {
+  const UpgradeToPremiumDetailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Upgrade to Premium"),
+        title: const Text("Upgrade to Premium Details"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
             const Text(
-              "Benefits of Upgrading to Premium:",
+              "Why Upgrade to Premium?",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const ListTile(
-              leading: Icon(Icons.star, color: Colors.amber),
-              title: Text("Access exclusive features."),
+              leading: Icon(Icons.check_circle, color: Colors.green),
+              title: Text("Gain access to exclusive tools and features."),
             ),
             const ListTile(
-              leading: Icon(Icons.verified, color: Colors.green),
-              title: Text("Priority customer support."),
+              leading: Icon(Icons.person_add, color: Colors.blue),
+              title: Text("Prioritize customer service requests."),
             ),
             const ListTile(
-              leading: Icon(Icons.cloud_download, color: Colors.blue),
-              title: Text("Higher storage capacity."),
+              leading: Icon(Icons.cloud_upload, color: Colors.teal),
+              title: Text("Expand your cloud storage limits."),
             ),
-            const ListTile(
-              leading: Icon(Icons.lock_open, color: Colors.red),
-              title: Text("Unlock all premium tools."),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const PaymentScreen(),
+                  ),
+                );
+              },
+              child: const Text("Proceed to Payment"),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
@@ -112,39 +120,103 @@ class UpgradeToPremiumScreen extends StatelessWidget {
   }
 }
 
-class EthicalPartnershipsScreen extends StatelessWidget {
-  const EthicalPartnershipsScreen({super.key});
+class PaymentScreen extends StatelessWidget {
+  const PaymentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Ethical Partnerships"),
+        title: const Text("Make Payment"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Upgrade to Premium - Payment",
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 20),
+            const Text(
+              "Choose a payment method:",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            ListTile(
+              leading: const Icon(Icons.credit_card, color: Colors.blue),
+              title: const Text("Credit/Debit Card"),
+              onTap: () {
+                // Handle card payment logic
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Card Payment Selected")),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.account_balance, color: Colors.green),
+              title: const Text("Bank Transfer"),
+              onTap: () {
+                // Handle bank transfer logic
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Bank Transfer Selected")),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.payment, color: Colors.purple),
+              title: const Text("Mobile Payment"),
+              onTap: () {
+                // Handle mobile payment logic
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Mobile Payment Selected")),
+                );
+              },
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text("Back to Upgrade Details"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class EthicalPartnershipDetailsScreen extends StatelessWidget {
+  const EthicalPartnershipDetailsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Ethical Partnerships Details"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
             const Text(
-              "Ways to Form Ethical Partnerships:",
+              "What are Ethical Partnerships?",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 10),
             const ListTile(
-              leading: Icon(Icons.handshake, color: Colors.green),
-              title: Text("Collaborate with eco-friendly companies."),
+              leading: Icon(Icons.group, color: Colors.green),
+              title: Text("Work with organizations that value sustainability."),
             ),
             const ListTile(
-              leading: Icon(Icons.people, color: Colors.blue),
-              title: Text("Engage with fair trade organizations."),
+              leading: Icon(Icons.handshake, color: Colors.blue),
+              title: Text("Engage in mutually beneficial collaborations."),
             ),
             const ListTile(
-              leading: Icon(Icons.public, color: Colors.teal),
-              title: Text("Support local communities."),
-            ),
-            const ListTile(
-              leading: Icon(Icons.volunteer_activism, color: Colors.purple),
-              title: Text("Promote sustainable practices."),
+              leading: Icon(Icons.eco, color: Colors.teal),
+              title: Text("Support environmentally conscious initiatives."),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
