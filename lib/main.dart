@@ -1,7 +1,10 @@
+// main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'app_screens/toDo_item.dart';
 import 'app_screens/toDo.dart';
+import 'app_screens/commercialization.dart'; // New screen for commercialization features
+import 'app_screens/sustainability.dart'; // New screen for sustainability features
 
 void main() {
   runApp(const Home());
@@ -15,7 +18,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  // Variables and Controllers
   final todosList = ToDo.todoList();
   List<ToDo> _foundToDo = [];
   final _todoController = TextEditingController();
@@ -26,7 +28,6 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  // Build Method
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
@@ -47,7 +48,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  // Widget Builders
   AppBar _buildAppBar() {
     return AppBar(
       elevation: 0,
@@ -59,13 +59,32 @@ class _HomeState extends State<Home> {
             color: Color.fromARGB(255, 17, 17, 17),
             size: 40,
           ),
-          SizedBox(
-            width: 37.0,
-            height: 40.0,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset("images/africa.JPG"),
-            ),
+          PopupMenuButton(
+            icon: const Icon(Icons.more_vert, color: Colors.black),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                child: const Text("Sustainability"),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SustainabilityScreen(),
+                    ),
+                  );
+                },
+              ),
+              PopupMenuItem(
+                child: const Text("Commercialization"),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const CommercializationScreen(),
+                    ),
+                  );
+                },
+              ),
+            ],
           )
         ],
       ),
@@ -74,7 +93,7 @@ class _HomeState extends State<Home> {
 
   Widget _buildBody() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 20.0),
       child: Column(
         children: [
           searchBox(),
@@ -113,11 +132,13 @@ class _HomeState extends State<Home> {
         children: [
           Expanded(
             child: Container(
-              margin: const EdgeInsets.only(bottom: 20.0, right: 20.0, left: 20.0),
-              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+              margin:
+                  const EdgeInsets.only(bottom: 20.0, right: 20.0, left: 20.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 25.0, vertical: 10.0),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: BorderRadius.circular(8.0),
               ),
               child: TextField(
                 controller: _todoController,
@@ -153,7 +174,7 @@ class _HomeState extends State<Home> {
 
   Widget searchBox() {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.0),
@@ -161,7 +182,7 @@ class _HomeState extends State<Home> {
       child: TextField(
         onChanged: (value) => _runFilter(value),
         decoration: const InputDecoration(
-          contentPadding: EdgeInsets.all(0),
+          contentPadding: EdgeInsets.symmetric(vertical: 10.0),
           prefixIcon: Icon(
             Icons.search,
             color: Color.fromARGB(255, 111, 105, 112),
@@ -175,7 +196,6 @@ class _HomeState extends State<Home> {
     );
   }
 
-  // Business Logic Methods
   void _handleToDoChange(ToDo todo) {
     setState(() {
       todo.isDone = !todo.isDone;
@@ -215,3 +235,4 @@ class _HomeState extends State<Home> {
     });
   }
 }
+
